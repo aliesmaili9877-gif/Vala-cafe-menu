@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: vala-cafe-menu
+    runtime: docker
+    plan: 0.5c-512mb
+    region: frankfurt
+    healthCheckPath: /api/public-menu
+    envVars:
+      - key: VALA_CLOUD_MENU
+        value: "1"
+      - key: VALA_MENU_SYNC_TOKEN
+        generateValue: true
+      - key: VALA_DB_PATH
+        value: /data/vala.db
+      - key: PORT
+        value: "5000"
+    disk:
+      name: vala-menu-data
+      mountPath: /data
+      sizeGB: 1
